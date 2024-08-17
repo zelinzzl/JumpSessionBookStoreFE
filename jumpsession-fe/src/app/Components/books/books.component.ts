@@ -14,6 +14,8 @@ export class BooksComponent {
   searchTerm: string = '';
   errorMessage: string = '';
 
+  isBookModalVisible: boolean = false;
+
   constructor(private bookService: BooksService) {}
 
   ngOnInit() {
@@ -41,4 +43,11 @@ export class BooksComponent {
   }
 
   // ToDo: open modal
+  openCreateBookModal() {
+    this.isBookModalVisible = true;
+  }
+
+  closeModal() {
+    this.isBookModalVisible = false;
+  }
 }
