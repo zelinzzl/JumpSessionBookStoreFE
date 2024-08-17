@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Admin } from '../Models/admin';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +15,23 @@ export class LoginService {
   //ToDo: write Login endpoint to handle log in, leave this as is for them to fix with correct endpoint, Maybe
   login(username: string, password: string): Observable<boolean> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    const admin = {
+      id: 1,
+      username: username,
+      password: password
+    }
     
-    return this.http.get<any>(`${this.apiUrl}/get-admins`, { headers })
-      .pipe(map(response => {
-        for (let admin of response) {
-          if (admin.username === username && admin.password === password) {
+    return this.http.post<Admin>(`${this.apiUrl}/get-username`, admin, { headers })
+      .pipe(map(response => {{
+        console.log(response);
+        
+          if (response.username === username && response.password === password) {
             return true;
           }
         }
         return false;
       }));
   }
+  
 }
