@@ -2,6 +2,9 @@
   <!-- ToDo: Create book -->
     <div class="card">
       <div class="card-body">
+        <div class="col-md-2">
+          <button type="button" class="btn btn-primary" (click)="openCreateBookModal()">Add book</button>
+        </div>
         <h2 class="card-title text-center mb-4">Books List</h2>
         <div class="form-group mb-2">
           <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchTerm" (input)="filterBooks()">
@@ -33,3 +36,6 @@
       </div>
     </div>
   </div>
+
+  <app-book-alocation-modal *ngIf="isBookModalVisible" (close)="closeModal()">
+</app-book-alocation-modal>
